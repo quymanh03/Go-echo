@@ -7,6 +7,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// @Summary Login
+// @Description Login to get JWT token
+// @ID auth-login
+// @Tags Auth
+// @Accept  json
+// @Produce  json
+// @Param user body userLoginRequest true "User Login Request"
+// @Success 200 {object} utils.HttpResponse
+// @Failure 400 {object} utils.HttpResponse
+// @Failure 500 {object} utils.HttpResponse
+// @Router /auth/login [post]
 func (*Handler) Login(c echo.Context) error {
 	req := &userLoginRequest{}
 

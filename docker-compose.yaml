@@ -1,0 +1,17 @@
+services:
+    postgres:
+        image: postgres:16.3-alpine3.20
+        container_name: beginner-postgres
+        environment:
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
+        ports:
+            - "${DB_PORT}:5432"
+        restart: unless-stopped
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+volumes:
+    postgres_data:
+        driver: local

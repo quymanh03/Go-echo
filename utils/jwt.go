@@ -12,13 +12,13 @@ type JwtService struct {
 	expireTime time.Duration
 }
 
-func NewJwtService(cfg *config.Config) *JwtService {
-	dur, err := time.ParseDuration(cfg.JWT.ExpireTime)
+func NewJwtService(cfg *config.JwtConfig) *JwtService {
+	dur, err := time.ParseDuration(cfg.ExpireTime)
 	if err != nil {
 		dur = time.Hour
 	}
 	return &JwtService{
-		secretKey:  cfg.JWT.SecretKey,
+		secretKey:  cfg.SecretKey,
 		expireTime: dur,
 	}
 }

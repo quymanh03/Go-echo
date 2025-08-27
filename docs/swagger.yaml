@@ -1,0 +1,93 @@
+basePath: /api/v1
+definitions:
+  handler.userLoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 6
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  utils.HttpResponse:
+    properties:
+      data: {}
+      message: {}
+      status:
+        type: string
+    type: object
+host: 127.0.0.1:3000
+info:
+  contact: {}
+  description: Beginner API Server
+  title: Beginner API Server
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login to get JWT token
+      operationId: auth-login
+      parameters:
+      - description: User Login Request
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/handler.userLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+      summary: Login
+      tags:
+      - Auth
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Health Check
+      operationId: get-health
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+      summary: Health Check
+      tags:
+      - Health
+produces:
+- application/json
+schemes:
+- http
+- https
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

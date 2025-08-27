@@ -12,7 +12,7 @@ func DIMiddleware() echo.MiddlewareFunc {
 	if err != nil {
 		panic(err)
 	}
-	jwtService := utils.NewJwtService(cfg)
+	jwtService := utils.NewJwtService(&cfg.JWT)
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			c.Set("config", cfg)
