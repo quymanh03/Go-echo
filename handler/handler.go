@@ -1,7 +1,17 @@
 package handler
 
-type Handler struct{}
+import (
+	"beginner/services"
 
-func New() *Handler {
-	return &Handler{}
+	"gorm.io/gorm"
+)
+
+type Handler struct {
+	userService services.UserService
+}
+
+func New(db *gorm.DB) *Handler {
+	return &Handler{
+		userService: services.NewUserService(db),
+	}
 }

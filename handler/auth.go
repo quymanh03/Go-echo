@@ -18,7 +18,7 @@ import (
 // @Failure 400 {object} utils.HttpResponse
 // @Failure 500 {object} utils.HttpResponse
 // @Router /auth/login [post]
-func (*Handler) Login(c echo.Context) error {
+func (h *Handler) Login(c echo.Context) error {
 	req := &userLoginRequest{}
 
 	if err := req.bind(c); err != nil {

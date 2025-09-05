@@ -30,8 +30,6 @@ func main() {
 	r := router.New()
 	r.GET("/docs/*", echoSwagger.WrapHandler)
 	v1 := r.Group("/api/v1")
-	h := handler.New()
-	h.Register(v1)
 
 	// Connect Database
 	envConfig, err := config.LoadConfig()
@@ -50,8 +48,14 @@ func main() {
 		panic(err)
 	}
 
-	dbGorm.Ping()
+	err = dbGorm.Ping()
+	if err != nil {
+		r.Logger.Fatal("Failed to ping database:", err)
+	}
+	r.Logger.Info("Database connected")
 
+	h := handler.New(gorm)
+	h.Register(v1)
 	// Start the server
 	r.Logger.Fatal(r.Start(":3000"))
 }
