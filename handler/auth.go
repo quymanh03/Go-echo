@@ -39,7 +39,7 @@ func (h *Handler) Login(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, utils.NewCustomErrorResponse("Invalid email or password"))
 	}
 
-	token, err := c.Get("jwt").(*utils.JwtService).GenerateToken(user.ID.String())
+	token, err := c.Get("jwt").(*utils.JwtService).GenerateToken(user.ID)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, utils.NewErrorResponse(err))
 	}

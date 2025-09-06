@@ -28,7 +28,8 @@ import (
 
 func main() {
 	r := router.New()
-	r.GET("/docs/*", echoSwagger.WrapHandler)
+
+	r.GET("/docs/*", echoSwagger.EchoWrapHandler(echoSwagger.PersistAuthorization(true)))
 	v1 := r.Group("/api/v1")
 
 	// Connect Database

@@ -127,6 +127,32 @@ paths:
       summary: Health Check
       tags:
       - Health
+  /user/me:
+    get:
+      consumes:
+      - application/json
+      description: Get user information
+      operationId: user-get-me
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: GetMe
+      tags:
+      - User
 produces:
 - application/json
 schemes:
