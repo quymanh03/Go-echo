@@ -11,6 +11,22 @@ definitions:
     - email
     - password
     type: object
+  handler.userRegisterRequest:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 6
+        type: string
+      username:
+        maxLength: 20
+        minLength: 3
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
   utils.HttpResponse:
     properties:
       data: {}
@@ -54,6 +70,37 @@ paths:
           schema:
             $ref: '#/definitions/utils.HttpResponse'
       summary: Login
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user
+      operationId: auth-register
+      parameters:
+      - description: User Register Request
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/handler.userRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.HttpResponse'
+      summary: Register
       tags:
       - Auth
   /health:

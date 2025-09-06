@@ -55,7 +55,7 @@ func main() {
 	r.Logger.Info("Database connected")
 
 	h := handler.New(gorm)
-	h.Register(v1)
+	h.RegisterRoutes(v1)
 	// Start the server
 	r.Logger.Fatal(r.Start(":3000"))
 }

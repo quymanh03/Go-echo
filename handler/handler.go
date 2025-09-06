@@ -1,17 +1,17 @@
 package handler
 
 import (
-	"beginner/services"
+	"beginner/repository"
 
 	"gorm.io/gorm"
 )
 
 type Handler struct {
-	userService services.UserService
+	UserRepository repository.UserRepository
 }
 
 func New(db *gorm.DB) *Handler {
 	return &Handler{
-		userService: services.NewUserService(db),
+		UserRepository: repository.NewUserRepository(db),
 	}
 }

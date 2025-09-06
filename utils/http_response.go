@@ -21,6 +21,15 @@ func NewErrorResponse(err error) *HttpResponse {
 	return e
 }
 
+func NewCustomErrorResponse(message string) *HttpResponse {
+	e := &HttpResponse{
+		Status:  "error",
+		Data:    nil,
+		Message: message,
+	}
+	return e
+}
+
 func NewSuccessResponse(data interface{}) *HttpResponse {
 	return &HttpResponse{
 		Status:  "success",
